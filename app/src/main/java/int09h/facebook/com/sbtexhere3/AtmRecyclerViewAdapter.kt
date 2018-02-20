@@ -7,14 +7,14 @@ import android.view.ViewGroup
 import android.widget.TextView
 
 import int09h.facebook.com.sbtexhere3.AtmFragment.OnListFragmentInteractionListener
-import int09h.facebook.com.sbtexhere3.dummy.DummyContent.DummyItem
+import int09h.facebook.com.sbtexhere3.models.Atm
 
 /**
  * [RecyclerView.Adapter] that can display a [DummyItem] and makes a call to the
  * specified [OnListFragmentInteractionListener].
  * TODO: Replace the implementation with code for your data type.
  */
-class AtmRecyclerViewAdapter(private val mValues: List<DummyItem>, private val mListener: OnListFragmentInteractionListener?) : RecyclerView.Adapter<AtmRecyclerViewAdapter.ViewHolder>() {
+class AtmRecyclerViewAdapter(private val mValues: List<Atm>, private val mListener: OnListFragmentInteractionListener?) : RecyclerView.Adapter<AtmRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -39,7 +39,7 @@ class AtmRecyclerViewAdapter(private val mValues: List<DummyItem>, private val m
     inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
         val mIdView: TextView
         val mContentView: TextView
-        var mItem: DummyItem? = null
+        var mItem: Atm? = null
 
         init {
             mIdView = mView.findViewById<View>(R.id.id) as TextView

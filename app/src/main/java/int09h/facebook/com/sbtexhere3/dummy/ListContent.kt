@@ -1,5 +1,6 @@
 package int09h.facebook.com.sbtexhere3.dummy
 
+import int09h.facebook.com.sbtexhere3.models.Atm
 import java.util.ArrayList
 import java.util.HashMap
 
@@ -10,17 +11,17 @@ import java.util.HashMap
  *
  * TODO: Replace all uses of this class before publishing your app.
  */
-object DummyContent {
+object ListContent {
 
     /**
      * An array of sample (dummy) items.
      */
-    val ITEMS:MutableList<DummyItem> = ArrayList<DummyItem>()
+    val ITEMS:MutableList<Atm> = ArrayList<Atm>()
 
     /**
      * A map of sample (dummy) items, by ID.
      */
-    val ITEM_MAP:MutableMap<String, DummyItem> = HashMap<String, DummyItem>()
+    val ITEM_MAP:MutableMap<String, Atm> = HashMap<String, Atm>()
 
     private val COUNT = 25
 
@@ -32,13 +33,13 @@ object DummyContent {
         }
     }
 
-    private fun addItem(item:DummyItem) {
+    private fun addItem(item: Atm) {
         ITEMS.add(item)
         ITEM_MAP.put(item.id, item)
     }
 
-    private fun createDummyItem(position:Int):DummyItem {
-        return DummyItem((position).toString(), "Item " + position, makeDetails(position))
+    private fun createDummyItem(position:Int): Atm {
+        return Atm((position).toString(), "Item " + position, makeDetails(position))
     }
 
     private fun makeDetails(position:Int):String {
@@ -51,13 +52,4 @@ object DummyContent {
         return builder.toString()
     }
 
-    /**
-     * A dummy item representing a piece of content.
-     */
-    class DummyItem( val id:String,  val content:String,  val details:String) {
-
-        public override fun toString():String {
-            return content
-        }
-    }
 }

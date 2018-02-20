@@ -10,8 +10,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
-import int09h.facebook.com.sbtexhere3.dummy.DummyContent
-import int09h.facebook.com.sbtexhere3.dummy.DummyContent.DummyItem
+import int09h.facebook.com.sbtexhere3.dummy.ListContent
+import int09h.facebook.com.sbtexhere3.models.Atm
 
 /**
  * A fragment representing a list of Items.
@@ -49,7 +49,7 @@ class AtmFragment : Fragment() {
             } else {
                 view.layoutManager = GridLayoutManager(context, mColumnCount)
             }
-            view.adapter = AtmRecyclerViewAdapter(DummyContent.ITEMS, mListener)
+            view.adapter = AtmRecyclerViewAdapter(ListContent.ITEMS, mListener)
         }
         return view
     }
@@ -80,7 +80,7 @@ class AtmFragment : Fragment() {
      */
     interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        fun onListFragmentInteraction(item: DummyItem)
+        fun onListFragmentInteraction(item: Atm)
     }
 
     companion object {
