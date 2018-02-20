@@ -9,16 +9,18 @@ import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import android.support.v4.view.ViewPager
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import int09h.facebook.com.sbtexhere3.dummy.DummyContent
 
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_main.view.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), AtmFragment.OnListFragmentInteractionListener {
 
     /**
      * The [android.support.v4.view.PagerAdapter] that will provide
@@ -46,6 +48,9 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    override fun onListFragmentInteraction(item: DummyContent.DummyItem) {
+        Log.d("MainActivity", "onListFragmentInteraction")
+    }
 
     /**
      * A [FragmentPagerAdapter] that returns a fragment corresponding to
@@ -56,7 +61,9 @@ class MainActivity : AppCompatActivity() {
         override fun getItem(position: Int): Fragment {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1)
+            if (position == 1)
+                return PlaceholderFragment.newInstance(position + 1)
+            return AtmFragment.newInstance(1)
         }
 
         override fun getCount(): Int {
