@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity(), AtmFragment.OnListFragmentInteractionL
      * [android.support.v4.app.FragmentStatePagerAdapter].
      */
     private var mSectionsPagerAdapter: SectionsPagerAdapter? = null
+    private val TAG = MainActivity::class.java.simpleName
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,7 +46,7 @@ class MainActivity : AppCompatActivity(), AtmFragment.OnListFragmentInteractionL
     }
 
     override fun onListFragmentInteraction(item: Atm) {
-        Log.d("MainActivity", "onListFragmentInteraction")
+        Log.d(TAG, "onListFragmentInteraction")
     }
 
     /**
