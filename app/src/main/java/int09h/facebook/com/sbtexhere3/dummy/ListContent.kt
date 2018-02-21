@@ -35,11 +35,14 @@ object ListContent {
 
     private fun addItem(item: Atm) {
         ITEMS.add(item)
-        ITEM_MAP.put(item.id, item)
+        ITEM_MAP.put(item.hashCode().toString(), item)
     }
 
     private fun createDummyItem(position:Int): Atm {
-        return Atm((position).toString(), "Item " + position, makeDetails(position))
+        return Atm("г Москва, ул Нижегородская, д. 13б",
+                "Платежное устройство",
+                "Прием наличных, наличные платежи, безналичные платежи",
+                200.0f)
     }
 
     private fun makeDetails(position:Int):String {

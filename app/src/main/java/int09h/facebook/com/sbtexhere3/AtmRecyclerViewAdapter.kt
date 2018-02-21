@@ -23,9 +23,12 @@ class AtmRecyclerViewAdapter(private val mValues: List<Atm>, private val mListen
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.mItem = mValues[position]
-//        holder.mIdView.text = mValues[position].id
-//        holder.mContentView.text = mValues[position].content
+        val item = mValues[position]
+        holder.mItem = item
+        holder.mStreetNameView.text = item?.street
+        holder.mAtmTypeView.text = item?.type
+        holder.mAtmDescriptionView.text = item?.description
+        holder.mAtmDistanceView.text = "Distance: " + item?.distance.toString() + " meters"
 
         holder.mView.setOnClickListener {
             mListener?.onListFragmentInteraction(holder.mItem!!)
@@ -48,6 +51,7 @@ class AtmRecyclerViewAdapter(private val mValues: List<Atm>, private val mListen
             mAtmDistanceView = mView.findViewById<View>(R.id.atmDistance) as TextView
             mStreetNameView = mView.findViewById<View>(R.id.atmStreetName) as TextView
             mAtmDescriptionView = mView.findViewById<View>(R.id.atmDescription) as TextView
+
         }
 
     }
