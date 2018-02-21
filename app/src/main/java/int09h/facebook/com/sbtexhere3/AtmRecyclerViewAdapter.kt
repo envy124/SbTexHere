@@ -24,8 +24,8 @@ class AtmRecyclerViewAdapter(private val mValues: List<Atm>, private val mListen
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.mItem = mValues[position]
-        holder.mIdView.text = mValues[position].id
-        holder.mContentView.text = mValues[position].content
+//        holder.mIdView.text = mValues[position].id
+//        holder.mContentView.text = mValues[position].content
 
         holder.mView.setOnClickListener {
             mListener?.onListFragmentInteraction(holder.mItem!!)
@@ -37,17 +37,16 @@ class AtmRecyclerViewAdapter(private val mValues: List<Atm>, private val mListen
     }
 
     inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
-        val mIdView: TextView
-        val mContentView: TextView
+        val mAtmTypeView: TextView
+        val mStreetNameView: TextView
+        val mAtmDescriptionView: TextView
         var mItem: Atm? = null
 
         init {
-            mIdView = mView.findViewById<View>(R.id.id) as TextView
-            mContentView = mView.findViewById<View>(R.id.content) as TextView
+            mAtmTypeView = mView.findViewById<View>(R.id.atmType) as TextView
+            mStreetNameView = mView.findViewById<View>(R.id.atmStreetName) as TextView
+            mAtmDescriptionView = mView.findViewById<View>(R.id.atmDescription) as TextView
         }
 
-        override fun toString(): String {
-            return super.toString() + " '" + mContentView.text + "'"
-        }
     }
 }
