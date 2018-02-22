@@ -25,6 +25,7 @@
             android:id="@+id/atmStreetName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
             android:layout_marginStart="6dp"
             android:layout_marginTop="9dp"/>
     </LinearLayout>
@@ -33,6 +34,7 @@
         android:id="@+id/atmDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-condensed"
         android:layout_marginStart="33dp"
         android:layout_columnSpan="2"
         android:layout_column="0"
@@ -42,6 +44,8 @@
         android:id="@+id/atmType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-black"
+        android:textStyle="bold"
         android:layout_marginStart="33dp"
         android:layout_column="0"
         android:layout_row="2" />
@@ -50,6 +54,7 @@
         android:id="@+id/atmDistance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-thin"
         android:layout_marginStart="33dp"
         android:layout_column="1"
         android:layout_row="2" />
