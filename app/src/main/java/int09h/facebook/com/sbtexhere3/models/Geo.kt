@@ -21,6 +21,16 @@ data class Triangle (val left: Point, val right: Point, val cb: Point) {
         return json
     }
 
+    fun serialize(): Map<String, String> {
+        return mapOf(
+                "llat" to left.latitude.toString(),
+                "llon" to left.latitude.toString(),
+                "rlat" to left.latitude.toString(),
+                "rlon" to left.latitude.toString(),
+                "cbLat" to left.latitude.toString(),
+                "cbLon" to left.latitude.toString())
+    }
+
     companion object {
         fun createFromPointAndRadius(point: Point, radius: Float): Triangle {
             val left = Point(0.0f, 0.0f)
