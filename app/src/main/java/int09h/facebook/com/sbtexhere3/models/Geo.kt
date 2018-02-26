@@ -12,23 +12,20 @@ data class Triangle (val left: Point, val right: Point, val cb: Point) {
 
     fun toJson(): JSONObject {
         val json = JSONObject()
-        json.put("llat", left.latitude)
-        json.put("llon", left.longitude)
-        json.put("rlat", right.latitude)
-        json.put("rlon", right.latitude)
-        json.put("cbLat", cb.latitude)
-        json.put("cbLon", cb.longitude)
+        for ((k, v) in serialize()) {
+            json.put(k, v)
+        }
         return json
     }
 
     fun serialize(): Map<String, String> {
         return mapOf(
                 "llat" to left.latitude.toString(),
-                "llon" to left.latitude.toString(),
-                "rlat" to left.latitude.toString(),
-                "rlon" to left.latitude.toString(),
-                "cbLat" to left.latitude.toString(),
-                "cbLon" to left.latitude.toString())
+                "llon" to left.longitude.toString(),
+                "rlat" to right.latitude.toString(),
+                "rlon" to right.longitude.toString(),
+                "cbLat" to cb.latitude.toString(),
+                "cbLon" to cb.longitude.toString())
     }
 
     companion object {
