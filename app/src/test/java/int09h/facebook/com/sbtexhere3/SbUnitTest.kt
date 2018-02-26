@@ -26,6 +26,6 @@ class SbUnitTest {
                 Point(55.78630908896398, 37.67243220355226),
                 Point(55.79839815416208, 37.71268679644777),
                 Point(55.750518899999996, 37.9878976))
-        api.getAtms(geo)
+        val atms = api.getAtms(geo)
     }
 }

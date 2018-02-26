@@ -9,6 +9,7 @@ import okhttp3.HttpUrl
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import java.io.IOException
+import java.net.URLEncoder
 
 
 /**
@@ -27,37 +28,32 @@ class Sberbank(
     private val atmList = Types.newParameterizedType(List::class.java, SbAtmResponse::class.java)!!
     private val getAtmsJsonAdapter = moshi.adapter<ArrayList<SbAtmResponse>>(atmList)
 
-    fun getAtms(geo: Triangle, size: Int = 9, page: Int = 0) {
+    fun getAtms(geo: Triangle, size: Int = 9, page: Int = 0): ArrayList<SbAtmResponse>? {
         val internalMethod = okhttp3.HttpUrl.parse(SB_GET_ATMS)?.newBuilder()!!
+
+        for ((name, value) in geo.serialize()) {
+            internalMethod.addQueryParameter(name, value)
+        }
+
+        internalMethod
                 .addQueryParameter("size", size.toString())
                 .addQueryParameter("page", page.toString())
                 .addQueryParameter("filter[type][]", "itt")
                 .addQueryParameter("filter[type][]", "atm")
                 .addQueryParameter("filter[flags][forPrivate]", "1")
 
-        for ((name, value) in geo.serialize()) {
-            internalMethod.addQueryParameter(name, value)
-        }
-//
-//        val internalMethodUrl = internalMethod.toString() + "&filter[type][]=itt" +
-//                "&filter[type][]=atm&filter[flags][forPrivate]=1"
-
         val method = HttpUrl.parse(sbApi)?.newBuilder()!!
                 .addQueryParameter("pipe", "branchesPipe")
-                .addQueryParameter("url", internalMethod.build().url().toString())
+                .addEncodedQueryParameter("url", URLEncoder.encode(internalMethod.build().toString(), "UTF-8"))
                 .build()
 
         val request = Request.Builder()
                 .url(method)
                 .build()
 
-//        httpClient.newCall(request).execute().use { response ->
-//            if (!response.isSuccessful) throw IOException("Unexpected code " + response)
-//            val bodyStr = response.body()?.string()
-//            val data = getAtmsJsonAdapter.fromJson(bodyStr)
-////            val data = getAtmsJsonAdapter.fromJson(response.body()?.source())
-//
-//            Log.d(TAG, data!![0].address)
-//        }
+        httpClient.newCall(request).execute().use { response ->
+            if (!response.isSuccessful) throw IOException("Unexpected code " + response)
+            return@getAtms getAtmsJsonAdapter.fromJson(response.body()?.source())
+        }
     }
 }
