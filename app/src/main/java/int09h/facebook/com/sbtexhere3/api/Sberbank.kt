@@ -1,6 +1,5 @@
 package int09h.facebook.com.sbtexhere3.api
 
-import android.util.Log
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
 import int09h.facebook.com.sbtexhere3.models.SbAtmResponse
@@ -28,7 +27,7 @@ class Sberbank(
     private val atmList = Types.newParameterizedType(List::class.java, SbAtmResponse::class.java)!!
     private val getAtmsJsonAdapter = moshi.adapter<ArrayList<SbAtmResponse>>(atmList)
 
-    fun getAtms(geo: Triangle, size: Int = 9, page: Int = 0): ArrayList<SbAtmResponse>? {
+    fun fetchAtms(geo: Triangle, size: Int = 9, page: Int = 0): ArrayList<SbAtmResponse>? {
         val internalMethod = okhttp3.HttpUrl.parse(SB_GET_ATMS)?.newBuilder()!!
 
         for ((name, value) in geo.serialize()) {
@@ -53,7 +52,7 @@ class Sberbank(
 
         httpClient.newCall(request).execute().use { response ->
             if (!response.isSuccessful) throw IOException("Unexpected code " + response)
-            return@getAtms getAtmsJsonAdapter.fromJson(response.body()?.source())
+            return@fetchAtms getAtmsJsonAdapter.fromJson(response.body()?.source())
         }
     }
 }
