@@ -1,12 +1,18 @@
 package int09h.facebook.com.sbtexhere3.models
 
 import org.json.JSONObject
+import java.lang.StrictMath.pow
+import kotlin.math.sqrt
 
 /**
  * Created by int09h on 23/02/2018.
  */
 
-data class Point (var latitude: Double, var longitude: Double)
+data class Point (var latitude: Double, var longitude: Double) {
+    fun distanceTo(p1: Point): Double {
+        return sqrt(pow(p1.latitude - latitude, 2.0) + pow(p1.longitude - longitude, 2.0))
+    }
+}
 
 data class Vector(val point1: Point, val point2: Point) {
 

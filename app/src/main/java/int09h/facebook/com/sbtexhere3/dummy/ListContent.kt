@@ -42,7 +42,7 @@ object ListContent {
         return Atm("г Москва, ул Нижегородская, д. 13б",
                 "Платежное устройство",
                 "Прием наличных, наличные платежи, безналичные платежи",
-                200.0f)
+                200.0)
     }
 
     private fun makeDetails(position:Int):String {
