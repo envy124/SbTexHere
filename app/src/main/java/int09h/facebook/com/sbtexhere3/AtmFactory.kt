@@ -15,6 +15,6 @@ class AtmFactory(private val api: Sberbank) {
         return atms?.map {
             val atmPos = Point(it.coordinates?.latitude!!, it.coordinates.longitude!!)
             Atm(it.address!!, it.type!!, it.stateName!!, currentPos.distanceTo(atmPos) )
-        }
+        }?.sortedBy { it.distance }
     }
 }
