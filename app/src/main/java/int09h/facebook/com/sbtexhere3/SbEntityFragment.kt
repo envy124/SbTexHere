@@ -24,7 +24,7 @@ import int09h.facebook.com.sbtexhere3.models.SbEntity
  * Mandatory empty constructor for the fragment manager to instantiate the
  * fragment (e.g. upon screen orientation changes).
  */
-class AtmFragment : Fragment() {
+class SbEntityFragment : Fragment() {
     // TODO: Customize parameters
     private var mColumnCount = 1
     private var mListener: OnListFragmentInteractionListener? = null
@@ -89,8 +89,8 @@ class AtmFragment : Fragment() {
         private val ARG_COLUMN_COUNT = "column-count"
 
         // TODO: Customize parameter initialization
-        fun newInstance(columnCount: Int): AtmFragment {
-            val fragment = AtmFragment()
+        fun newInstance(columnCount: Int): SbEntityFragment {
+            val fragment = SbEntityFragment()
             val args = Bundle()
             args.putInt(ARG_COLUMN_COUNT, columnCount)
             fragment.arguments = args

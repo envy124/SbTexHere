@@ -16,7 +16,7 @@ import int09h.facebook.com.sbtexhere3.models.SbEntity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_main.view.*
 
-class MainActivity : AppCompatActivity(), AtmFragment.OnListFragmentInteractionListener {
+class MainActivity : AppCompatActivity(), SbEntityFragment.OnListFragmentInteractionListener {
 
     /**
      * The [android.support.v4.view.PagerAdapter] that will provide
@@ -60,7 +60,7 @@ class MainActivity : AppCompatActivity(), AtmFragment.OnListFragmentInteractionL
             // Return a PlaceholderFragment (defined as a static inner class below).
             if (position == 1)
                 return PlaceholderFragment.newInstance(position + 1)
-            return AtmFragment.newInstance(1)
+            return SbEntityFragment.newInstance(1)
         }
 
         override fun getCount(): Int {

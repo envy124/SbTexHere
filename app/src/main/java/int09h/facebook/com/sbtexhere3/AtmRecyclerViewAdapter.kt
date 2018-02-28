@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 
-import int09h.facebook.com.sbtexhere3.AtmFragment.OnListFragmentInteractionListener
+import int09h.facebook.com.sbtexhere3.SbEntityFragment.OnListFragmentInteractionListener
 import int09h.facebook.com.sbtexhere3.models.SbEntity
 
 /**

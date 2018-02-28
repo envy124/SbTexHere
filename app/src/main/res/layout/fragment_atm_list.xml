@@ -9,5 +9,5 @@
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
     app:layoutManager="LinearLayoutManager"
-    tools:context="int09h.facebook.com.sbtexhere3.AtmFragment"
+    tools:context="int09h.facebook.com.sbtexhere3.SbEntityFragment"
     tools:listitem="@layout/fragment_atm" />
