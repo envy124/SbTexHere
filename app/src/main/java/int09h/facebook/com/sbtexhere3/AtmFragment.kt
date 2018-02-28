@@ -11,7 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 
 import int09h.facebook.com.sbtexhere3.dummy.ListContent
-import int09h.facebook.com.sbtexhere3.models.Atm
+import int09h.facebook.com.sbtexhere3.models.SbEntity
 
 /**
  * A fragment representing a list of Items.
@@ -80,7 +80,7 @@ class AtmFragment : Fragment() {
      */
     interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        fun onListFragmentInteraction(item: Atm)
+        fun onListFragmentInteraction(item: SbEntity)
     }
 
     companion object {

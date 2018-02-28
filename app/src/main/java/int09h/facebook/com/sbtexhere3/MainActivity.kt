@@ -11,7 +11,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import int09h.facebook.com.sbtexhere3.models.Atm
+import int09h.facebook.com.sbtexhere3.models.SbEntity
 
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_main.view.*
@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity(), AtmFragment.OnListFragmentInteractionL
 
     }
 
-    override fun onListFragmentInteraction(item: Atm) {
+    override fun onListFragmentInteraction(item: SbEntity) {
         Log.d(TAG, "onListFragmentInteraction")
     }
 

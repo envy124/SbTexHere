@@ -1,6 +1,6 @@
 package int09h.facebook.com.sbtexhere3.dummy
 
-import int09h.facebook.com.sbtexhere3.models.Atm
+import int09h.facebook.com.sbtexhere3.models.SbEntity
 import java.util.ArrayList
 import java.util.HashMap
 
@@ -16,12 +16,12 @@ object ListContent {
     /**
      * An array of sample (dummy) items.
      */
-    val ITEMS:MutableList<Atm> = ArrayList<Atm>()
+    val ITEMS:MutableList<SbEntity> = ArrayList<SbEntity>()
 
     /**
      * A map of sample (dummy) items, by ID.
      */
-    val ITEM_MAP:MutableMap<String, Atm> = HashMap<String, Atm>()
+    val ITEM_MAP:MutableMap<String, SbEntity> = HashMap<String, SbEntity>()
 
     private val COUNT = 25
 
@@ -33,13 +33,13 @@ object ListContent {
         }
     }
 
-    private fun addItem(item: Atm) {
+    private fun addItem(item: SbEntity) {
         ITEMS.add(item)
         ITEM_MAP.put(item.hashCode().toString(), item)
     }
 
-    private fun createDummyItem(position:Int): Atm {
-        return Atm("г Москва, ул Нижегородская, д. 13б",
+    private fun createDummyItem(position:Int): SbEntity {
+        return SbEntity("г Москва, ул Нижегородская, д. 13б",
                 "Платежное устройство",
                 "Прием наличных, наличные платежи, безналичные платежи",
                 200.0)
