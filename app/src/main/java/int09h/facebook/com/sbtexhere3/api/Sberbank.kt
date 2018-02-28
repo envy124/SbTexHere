@@ -3,6 +3,7 @@ package int09h.facebook.com.sbtexhere3.api
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
 import int09h.facebook.com.sbtexhere3.models.SbAtmResponse
+import int09h.facebook.com.sbtexhere3.models.SbFilialResponse
 import int09h.facebook.com.sbtexhere3.models.Triangle
 import okhttp3.HttpUrl
 import okhttp3.OkHttpClient
@@ -25,9 +26,11 @@ class Sberbank(
     private val TAG = Sberbank::class.java.simpleName
     private val moshi = Moshi.Builder().build()
     private val atmList = Types.newParameterizedType(List::class.java, SbAtmResponse::class.java)!!
-    private val getAtmsJsonAdapter = moshi.adapter<ArrayList<SbAtmResponse>>(atmList)
+    private val atmsJsonAdapter = moshi.adapter<ArrayList<SbAtmResponse>>(atmList)
+    private val filialList = Types.newParameterizedType(List::class.java, SbFilialResponse::class.java)!!
+    private val filialsJsonAdapter = moshi.adapter<ArrayList<SbFilialResponse>>(filialList)
 
-    fun fetchAtms(geo: Triangle, size: Int = 9, page: Int = 0): ArrayList<SbAtmResponse>? {
+    private fun prepareInternalCall(geo: Triangle, size: Int, page: Int): HttpUrl.Builder {
         val internalMethod = okhttp3.HttpUrl.parse(SB_INTERNAL_GET)?.newBuilder()!!
 
         for ((name, value) in geo.serialize()) {
@@ -37,6 +40,14 @@ class Sberbank(
         internalMethod
                 .addQueryParameter("size", size.toString())
                 .addQueryParameter("page", page.toString())
+
+        return internalMethod
+    }
+
+    fun fetchAtms(geo: Triangle, size: Int = 9, page: Int = 0): ArrayList<SbAtmResponse>? {
+        val internalMethod = prepareInternalCall(geo, size, page)
+
+        internalMethod
                 .addQueryParameter("filter[type][]", "itt")
                 .addQueryParameter("filter[type][]", "atm")
                 .addQueryParameter("filter[flags][forPrivate]", "1")
@@ -52,7 +63,29 @@ class Sberbank(
 
         httpClient.newCall(request).execute().use { response ->
             if (!response.isSuccessful) throw IOException("Unexpected code " + response)
-            return@fetchAtms getAtmsJsonAdapter.fromJson(response.body()?.source())
+            return@fetchAtms atmsJsonAdapter.fromJson(response.body()?.source())
+        }
+    }
+
+    fun fetchFilials(geo: Triangle, size: Int = 9, page: Int = 0): ArrayList<SbFilialResponse>? {
+        val internalMethod = prepareInternalCall(geo, size, page)
+
+        internalMethod
+                .addQueryParameter("filter[type][]", "filial")
+                .addQueryParameter("filter[flags][forPrivate]", "1")
+
+        val method = HttpUrl.parse(sbApi)?.newBuilder()!!
+                .addQueryParameter("pipe", "branchesPipe")
+                .addEncodedQueryParameter("url", URLEncoder.encode(internalMethod.build().toString(), "UTF-8"))
+                .build()
+
+        val request = Request.Builder()
+                .url(method)
+                .build()
+
+        httpClient.newCall(request).execute().use { response ->
+            if (!response.isSuccessful) throw IOException("Unexpected code " + response)
+            return@fetchFilials filialsJsonAdapter.fromJson(response.body()?.source())
         }
     }
 }
