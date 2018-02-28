@@ -24,15 +24,17 @@ class AtmRecyclerViewAdapter(private val mValues: List<Atm>, private val mListen
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = mValues[position]
-        holder.mItem = item
-        holder.mStreetNameView.text = item?.street
-        holder.mAtmTypeView.text = item?.type
-        holder.mAtmDescriptionView.text = item?.description
-        holder.mAtmDistanceView.text = "Distance: " + item?.distance.toString() + " meters"
+        with(holder, {
+            mItem = item
+            mStreetNameView.text = item.street
+            mAtmTypeView.text = item.type
+            mAtmDescriptionView.text = item.description
+            mAtmDistanceView.text = mView.context.resources.getString(R.string.atm_distance).format(item.distance)
 
-        holder.mView.setOnClickListener {
-            mListener?.onListFragmentInteraction(holder.mItem!!)
-        }
+            mView.setOnClickListener {
+                mListener?.onListFragmentInteraction(mItem!!)
+            }
+        })
     }
 
     override fun getItemCount(): Int {

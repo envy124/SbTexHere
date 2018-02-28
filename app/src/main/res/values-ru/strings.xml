@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SbTexHere3</string>
+    <string name="tab_text_1">Отделения</string>
+    <string name="tab_text_2">Карта</string>
+    <string name="action_settings">Настройки</string>
+    <string name="atmIconDescription">Иконка отделения</string>
+    <string name="section_format">Тестовая строка: %1%d</string>
+    <string name="atm_distance">Расстояние: %.2f метров</string>
+</resources>
