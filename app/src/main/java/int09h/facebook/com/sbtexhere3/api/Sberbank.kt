@@ -16,7 +16,7 @@ import java.net.URLEncoder
  */
 
 const val SB_ENDPOINT = "https://sberbank.ru/portalserver/proxy/"
-const val SB_GET_ATMS = "http://localhost/oib-rs/byBounds/entities"
+const val SB_INTERNAL_GET = "http://localhost/oib-rs/byBounds/entities"
 
 class Sberbank(
         private val sbApi: String = SB_ENDPOINT,
@@ -28,7 +28,7 @@ class Sberbank(
     private val getAtmsJsonAdapter = moshi.adapter<ArrayList<SbAtmResponse>>(atmList)
 
     fun fetchAtms(geo: Triangle, size: Int = 9, page: Int = 0): ArrayList<SbAtmResponse>? {
-        val internalMethod = okhttp3.HttpUrl.parse(SB_GET_ATMS)?.newBuilder()!!
+        val internalMethod = okhttp3.HttpUrl.parse(SB_INTERNAL_GET)?.newBuilder()!!
 
         for ((name, value) in geo.serialize()) {
             internalMethod.addQueryParameter(name, value)
