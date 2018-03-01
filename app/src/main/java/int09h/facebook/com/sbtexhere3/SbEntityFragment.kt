@@ -42,10 +42,10 @@ class SbEntityFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view = inflater!!.inflate(R.layout.fragment_atm_list, container, false)
-        val gps = GPSTracker(context)
-        val position = gps.getLocation()!!
-        val filials = FilialFactory(Sberbank())
-                .getFilials(Point(position.latitude, position.longitude), 0.5)!!
+//        val gps = GPSTracker(context)
+//        val position = gps.getLocation()!!
+//        val filials = FilialFactory(Sberbank())
+//                .getFilials(Point(position.latitude, position.longitude), 0.5)!!
 
         // Set the adapter
         if (view is RecyclerView) {
@@ -55,7 +55,7 @@ class SbEntityFragment : Fragment() {
             } else {
                 view.layoutManager = GridLayoutManager(context, mColumnCount)
             }
-            view.adapter = AtmRecyclerViewAdapter(filials, mListener)
+            view.adapter = AtmRecyclerViewAdapter(ListContent.ITEMS, mListener)
         }
         return view
     }

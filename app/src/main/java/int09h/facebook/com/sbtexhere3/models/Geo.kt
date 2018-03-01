@@ -27,7 +27,7 @@ data class Vector(val point1: Point, val point2: Point) {
     }
 }
 
-data class Triangle (val left: Point, val right: Point, val cb: Point) {
+data class SbGeo(val left: Point, val right: Point, val cb: Point) {
 
     fun toJson(): JSONObject {
         val json = JSONObject()
@@ -48,16 +48,11 @@ data class Triangle (val left: Point, val right: Point, val cb: Point) {
     }
 
     companion object {
-        fun createFromPointAndRadius(center: Point, radius: Double): Triangle {
-            // This is the goofiest way to get triangle from point, but I don't care
-            val cb = Point(center.latitude + radius, center.longitude)
-            val radiusVector = Vector(center, cb)
-            val left = radiusVector.rotate(-120.0)
-            val right = radiusVector.rotate(120.0)
-            left.latitude -= radius / 2
-            right.latitude -= radius / 2
-            cb.latitude -= radius * 1.5
-            return Triangle(left, right, cb)
+        fun createFromPointAndRadius(center: Point, radius: Double): SbGeo {
+            val homeLocation = Point(55.750518899999996, 37.9878976)
+            val right = Point(center.latitude + radius, center.longitude + radius)
+            val left = Point(center.latitude - radius, center.longitude - radius)
+            return SbGeo(left, right, homeLocation)
         }
     }
 }

@@ -4,7 +4,7 @@ import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
 import int09h.facebook.com.sbtexhere3.models.SbAtmResponse
 import int09h.facebook.com.sbtexhere3.models.SbFilialResponse
-import int09h.facebook.com.sbtexhere3.models.Triangle
+import int09h.facebook.com.sbtexhere3.models.SbGeo
 import okhttp3.HttpUrl
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -30,7 +30,7 @@ class Sberbank(
     private val filialList = Types.newParameterizedType(List::class.java, SbFilialResponse::class.java)!!
     private val filialsJsonAdapter = moshi.adapter<ArrayList<SbFilialResponse>>(filialList)
 
-    private fun prepareInternalCall(geo: Triangle, size: Int, page: Int): HttpUrl.Builder {
+    private fun prepareInternalCall(geo: SbGeo, size: Int, page: Int): HttpUrl.Builder {
         val internalMethod = okhttp3.HttpUrl.parse(SB_INTERNAL_GET)?.newBuilder()!!
 
         for ((name, value) in geo.serialize()) {
@@ -44,7 +44,7 @@ class Sberbank(
         return internalMethod
     }
 
-    fun fetchAtms(geo: Triangle, size: Int = 9, page: Int = 0): ArrayList<SbAtmResponse>? {
+    fun fetchAtms(geo: SbGeo, size: Int = 9, page: Int = 0): ArrayList<SbAtmResponse>? {
         val internalMethod = prepareInternalCall(geo, size, page)
 
         internalMethod
@@ -67,7 +67,7 @@ class Sberbank(
         }
     }
 
-    fun fetchFilials(geo: Triangle, size: Int = 9, page: Int = 0): ArrayList<SbFilialResponse>? {
+    fun fetchFilials(geo: SbGeo, size: Int = 9, page: Int = 0): ArrayList<SbFilialResponse>? {
         val internalMethod = prepareInternalCall(geo, size, page)
 
         internalMethod
