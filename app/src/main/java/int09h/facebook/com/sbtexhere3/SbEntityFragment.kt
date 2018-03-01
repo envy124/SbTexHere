@@ -11,7 +11,6 @@ import android.view.View
 import android.view.ViewGroup
 import int09h.facebook.com.sbtexhere3.api.Sberbank
 
-import int09h.facebook.com.sbtexhere3.dummy.ListContent
 import int09h.facebook.com.sbtexhere3.models.Point
 import int09h.facebook.com.sbtexhere3.models.SbEntity
 import android.os.StrictMode
