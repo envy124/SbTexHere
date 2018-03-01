@@ -14,6 +14,9 @@ import int09h.facebook.com.sbtexhere3.api.Sberbank
 import int09h.facebook.com.sbtexhere3.dummy.ListContent
 import int09h.facebook.com.sbtexhere3.models.Point
 import int09h.facebook.com.sbtexhere3.models.SbEntity
+import android.os.StrictMode
+
+
 
 /**
  * A fragment representing a list of Items.
@@ -42,10 +45,14 @@ class SbEntityFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view = inflater!!.inflate(R.layout.fragment_atm_list, container, false)
-//        val gps = GPSTracker(context)
-//        val position = gps.getLocation()!!
-//        val filials = FilialFactory(Sberbank())
-//                .getFilials(Point(position.latitude, position.longitude), 0.5)!!
+        if (android.os.Build.VERSION.SDK_INT > 9) {
+            val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
+            StrictMode.setThreadPolicy(policy)
+        }
+        val gps = GPSTracker(context)
+        val position = gps.getLocation()!!
+        val filials = FilialFactory(Sberbank())
+                .getFilials(Point(position.latitude, position.longitude), 0.01)!!
 
         // Set the adapter
         if (view is RecyclerView) {
@@ -55,7 +62,7 @@ class SbEntityFragment : Fragment() {
             } else {
                 view.layoutManager = GridLayoutManager(context, mColumnCount)
             }
-            view.adapter = AtmRecyclerViewAdapter(ListContent.ITEMS, mListener)
+            view.adapter = AtmRecyclerViewAdapter(filials, mListener)
         }
         return view
     }
