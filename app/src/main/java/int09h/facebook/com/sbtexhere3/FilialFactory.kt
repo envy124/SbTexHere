@@ -14,7 +14,7 @@ class FilialFactory(private val api: Sberbank) {
         val filials = api.fetchFilials(geo)?.distinctBy { it.address }
         return filials?.map {
             val atmPos = Point(it.coordinates?.latitude!!, it.coordinates.longitude!!)
-            SbEntity(it.address!!, it.type!!, it.name!!, currentPos.distanceTo(atmPos) )
+            SbEntity(it.address!!, it.type!!, it.name!!, currentPos.distanceToMeters(atmPos) )
         }?.sortedBy { it.distance }
     }
 }

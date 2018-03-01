@@ -12,6 +12,17 @@ data class Point (var latitude: Double, var longitude: Double) {
     fun distanceTo(p1: Point): Double {
         return sqrt(pow(p1.latitude - latitude, 2.0) + pow(p1.longitude - longitude, 2.0))
     }
+
+    fun distanceToMeters(p1: Point): Double {
+        val earthRadius = 6371000.0 //meters
+        val dLat = Math.toRadians((p1.latitude - latitude))
+        val dLng = Math.toRadians((p1.longitude - longitude))
+        val a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(Math.toRadians(latitude)) * Math.cos(Math.toRadians(p1.latitude)) *
+                Math.sin(dLng / 2) * Math.sin(dLng / 2)
+        val c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
+
+        return earthRadius * c
+    }
 }
 
 data class Vector(val point1: Point, val point2: Point) {

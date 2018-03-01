@@ -35,4 +35,10 @@ class SbUnitTest {
         val atms = Sberbank().fetchAtms(geo)!!
         assertNotEquals("atms from point is empty", 0, atms.size)
     }
+
+    @Test
+    fun filialFactory_isCorrect() {
+        val filials = FilialFactory(Sberbank()).getFilials(Point(55.796014,37.707481), 0.01)!!
+        assertNotEquals("filials from point is empty", 0, filials.size)
+    }
 }
