@@ -14,7 +14,7 @@ class AtmFactory(private val api: Sberbank) {
         val atms = api.fetchAtms(geo)?.distinctBy { it.address }
         return atms?.map {
             val atmPos = Point(it.coordinates?.latitude!!, it.coordinates.longitude!!)
-            SbEntity(it.address!!, it.type!!, it.stateName!!, currentPos.distanceTo(atmPos) )
+            SbEntity(it.address!!, it.type!!, it.stateName!!, currentPos.distanceTo(atmPos), atmPos )
         }?.sortedBy { it.distance }
     }
 }
