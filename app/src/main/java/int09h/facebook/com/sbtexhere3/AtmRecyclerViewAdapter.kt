@@ -27,7 +27,7 @@ class AtmRecyclerViewAdapter(private val mValues: List<SbEntity>, private val mL
         with(holder, {
             mItem = item
             mStreetNameView.text = item.street
-            mAtmTypeView.text = item.type
+//            mAtmTypeView.text = item.type
             mAtmDescriptionView.text = item.description
             mAtmDistanceView.text = mView.context.resources.getString(R.string.atm_distance).format(item.distance)
 
@@ -42,14 +42,14 @@ class AtmRecyclerViewAdapter(private val mValues: List<SbEntity>, private val mL
     }
 
     inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
-        val mAtmTypeView: TextView
+//        val mAtmTypeView: TextView
         val mStreetNameView: TextView
         val mAtmDistanceView: TextView
         val mAtmDescriptionView: TextView
         var mItem: SbEntity? = null
 
         init {
-            mAtmTypeView = mView.findViewById<View>(R.id.atmType) as TextView
+//            mAtmTypeView = mView.findViewById<View>(R.id.atmType) as TextView
             mAtmDistanceView = mView.findViewById<View>(R.id.atmDistance) as TextView
             mStreetNameView = mView.findViewById<View>(R.id.atmStreetName) as TextView
             mAtmDescriptionView = mView.findViewById<View>(R.id.atmDescription) as TextView
