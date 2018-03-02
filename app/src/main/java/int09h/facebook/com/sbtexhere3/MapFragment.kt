@@ -22,6 +22,7 @@ import int09h.facebook.com.sbtexhere3.models.Point
 class MapFragment : Fragment() {
     private var googleMap: GoogleMap? = null
     private var mMapView: MapView? = null
+    private val markers = HashSet<LatLng>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -49,9 +50,6 @@ class MapFragment : Fragment() {
 
             }
 
-            // For dropping a marker at a point on the Map
-            val sydney = Point(-34.0, 151.0)
-            addMarker(sydney)
         })
 
         return rootView
@@ -79,8 +77,11 @@ class MapFragment : Fragment() {
 
     fun addMarker(p: Point) {
         val marker = LatLng(p.latitude, p.longitude)
-        googleMap?.addMarker(MarkerOptions()
-                        .position(marker))
+        if (!markers.contains(marker)) {
+            googleMap?.addMarker(MarkerOptions()
+                    .position(marker))
+            markers.add(marker)
+        }
         val cameraPosition = CameraPosition.Builder().target(marker).zoom(12f).build()
         googleMap?.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
     }

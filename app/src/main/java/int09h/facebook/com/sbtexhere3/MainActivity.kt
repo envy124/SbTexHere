@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity(), SbEntityFragment.OnListFragmentInterac
     }
 
     override fun onListFragmentInteraction(item: SbEntity) {
-        Log.d(TAG, "onListFragmentInteraction")
+        MapFragment.addMarker(item.position)
     }
 
     /**
