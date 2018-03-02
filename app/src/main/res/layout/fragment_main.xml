@@ -3,7 +3,7 @@
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="int09h.facebook.com.sbtexhere3.MainActivity$MapFragment">
+    tools:context="int09h.facebook.com.sbtexhere3.MapFragment">
 
     <com.google.android.gms.maps.MapView
         android:id="@+id/mapView"
