@@ -48,6 +48,8 @@ class AtmRecyclerViewAdapter(private val mListener: OnListFragmentInteractionLis
 
     fun addItem(item: SbEntity) {
         mValues!!.add(item)
+        super.notifyDataSetChanged()
+        MapFragment.instance?.addMarker(item.position)
     }
 
     inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {

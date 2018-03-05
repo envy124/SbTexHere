@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity(), SbEntityFragment.OnListFragmentInterac
     }
 
     override fun onListFragmentInteraction(item: SbEntity) {
-        MapFragment.instance?.addMarker(item.position)
+        MapFragment.instance?.setCameraPosition(item.position, 12f)
         val tabLayout = findViewById<TabLayout>(R.id.tabs)
         tabLayout.getTabAt(1)?.select()
     }
