@@ -82,9 +82,15 @@ class MapFragment : Fragment() {
                     .position(marker))
             markers.add(marker)
         }
-        val cameraPosition = CameraPosition.Builder().target(marker).zoom(12f).build()
+        setCameraPosition(p)
+    }
+
+    fun setCameraPosition(p: Point, zoom: Float = 11f) {
+        val pos = LatLng(p.latitude, p.longitude)
+        val cameraPosition = CameraPosition.Builder().target(pos).zoom(zoom).build()
         googleMap?.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
     }
+
 
     companion object {
         /**
