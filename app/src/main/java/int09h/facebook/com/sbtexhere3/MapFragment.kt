@@ -1,5 +1,6 @@
 package int09h.facebook.com.sbtexhere3
 
+import android.content.res.Resources
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -9,10 +10,12 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.MapsInitializer
-import com.google.android.gms.maps.model.CameraPosition
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.*
 import int09h.facebook.com.sbtexhere3.models.Point
+import android.graphics.Bitmap
+import android.provider.MediaStore.Images.Media.getBitmap
+import android.graphics.drawable.BitmapDrawable
+import android.support.v4.content.ContextCompat
 
 
 /**
@@ -23,10 +26,14 @@ class MapFragment : Fragment() {
     private var googleMap: GoogleMap? = null
     private var mMapView: MapView? = null
     private val markers = HashSet<LatLng>()
+    private var markerIcon: Bitmap? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.fragment_main, container, false)
+
+        val bitmapdraw = ContextCompat.getDrawable(activity, R.drawable.map_point_orange) as BitmapDrawable
+        markerIcon = Bitmap.createScaledBitmap(bitmapdraw.bitmap, 37, 28, false)
 
         mMapView = rootView.findViewById(R.id.mapView) as MapView
         mMapView!!.onCreate(savedInstanceState)
@@ -79,7 +86,8 @@ class MapFragment : Fragment() {
         val marker = LatLng(p.latitude, p.longitude)
         if (!markers.contains(marker)) {
             googleMap?.addMarker(MarkerOptions()
-                    .position(marker))
+                    .position(marker)
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)))
             markers.add(marker)
         }
         setCameraPosition(p)
