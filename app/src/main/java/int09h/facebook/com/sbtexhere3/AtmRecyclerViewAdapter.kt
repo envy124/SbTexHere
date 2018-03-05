@@ -14,7 +14,12 @@ import int09h.facebook.com.sbtexhere3.models.SbEntity
  * specified [OnListFragmentInteractionListener].
  * TODO: Replace the implementation with code for your data type.
  */
-class AtmRecyclerViewAdapter(private val mValues: List<SbEntity>, private val mListener: OnListFragmentInteractionListener?) : RecyclerView.Adapter<AtmRecyclerViewAdapter.ViewHolder>() {
+class AtmRecyclerViewAdapter(private val mListener: OnListFragmentInteractionListener?) : RecyclerView.Adapter<AtmRecyclerViewAdapter.ViewHolder>() {
+    private var mValues: MutableList<SbEntity>? = null
+
+    init {
+        mValues = mutableListOf()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -23,7 +28,7 @@ class AtmRecyclerViewAdapter(private val mValues: List<SbEntity>, private val mL
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = mValues[position]
+        val item = mValues!![position]
         with(holder, {
             mItem = item
             mStreetNameView.text = item.street
@@ -38,7 +43,11 @@ class AtmRecyclerViewAdapter(private val mValues: List<SbEntity>, private val mL
     }
 
     override fun getItemCount(): Int {
-        return mValues.size
+        return mValues!!.size
+    }
+
+    fun addItem(item: SbEntity) {
+        mValues!!.add(item)
     }
 
     inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
