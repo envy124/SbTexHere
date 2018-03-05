@@ -14,7 +14,7 @@ import android.util.Log
 /**
  * Created by int09h on 28/02/2018.
  */
-class GPSTracker(private val mContext: Context) : Service(), LocationListener {
+class GPSTracker(private val mContext: Context) : Service(), LocationListener, FilialDownloader.LocationRetriever {
 
     // Flag for GPS status
     internal var isGPSEnabled = false
@@ -36,7 +36,7 @@ class GPSTracker(private val mContext: Context) : Service(), LocationListener {
         getLocation()
     }
 
-    fun getLocation(): Location? {
+    override fun getLocation(): Location? {
         try {
             locationManager = mContext
                     .getSystemService(LOCATION_SERVICE) as LocationManager?

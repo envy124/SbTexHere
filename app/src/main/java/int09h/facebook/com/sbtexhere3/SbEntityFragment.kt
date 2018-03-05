@@ -9,12 +9,8 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import int09h.facebook.com.sbtexhere3.api.Sberbank
 
-import int09h.facebook.com.sbtexhere3.models.Point
 import int09h.facebook.com.sbtexhere3.models.SbEntity
-import android.os.StrictMode
-import int09h.facebook.com.sbtexhere3.models.FilialArguments
 
 
 /**
@@ -45,7 +41,6 @@ class SbEntityFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         val view = inflater!!.inflate(R.layout.fragment_atm_list, container, false)
         val gps = GPSTracker(context)
-        val position = gps.getLocation()!!
 
         // Set the adapter
         if (view is RecyclerView) {
@@ -56,7 +51,7 @@ class SbEntityFragment : Fragment() {
                 view.layoutManager = GridLayoutManager(context, mColumnCount)
             }
             val adapter = AtmRecyclerViewAdapter(mListener)
-            FilialDownloader(adapter).execute(FilialArguments(position, 0.01))
+            FilialDownloader(adapter, gps).execute(0.01)
             view.adapter = adapter
         }
         return view
