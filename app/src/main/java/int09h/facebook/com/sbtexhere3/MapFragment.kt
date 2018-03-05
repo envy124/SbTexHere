@@ -99,7 +99,7 @@ class MapFragment : Fragment() {
          */
         private val ARG_SECTION_NUMBER = "section_number"
 
-        private var instance: MapFragment? = null
+        var instance: MapFragment? = null
 
         /**
          * Returns a new instance of this fragment for the given section
@@ -113,10 +113,6 @@ class MapFragment : Fragment() {
                 instance?.arguments = args
             }
             return instance!!
-        }
-
-        fun addMarker(p: Point) {
-            instance?.addMarker(p)
         }
     }
 }
